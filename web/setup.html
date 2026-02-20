@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GateKeeper — Initial Setup</title>
+    <link rel="stylesheet" href="css/fonts.css">
+    <style>
+        :root {
+            --bg-body: #0a0a0f;
+            --bg-card: #0f0f1a;
+            --bg-input: #1a1a2e;
+            --border-subtle: #374151;
+            --border-focus: rgba(0,255,159,0.4);
+            --green-30: rgba(0,255,159,0.3);
+            --green-80: rgba(0,255,159,0.8);
+            --green-glow: 0 0 20px rgba(0,255,159,0.3);
+            --accent-green: #00ff9f;
+            --accent-cyan: #00d4ff;
+            --accent-red: #ff4d6a;
+            --text-primary: #f1f1f1;
+            --text-secondary: #d1d5db;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            --radius: 6px;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-heading: 'Orbitron', monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-mono);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-grid {
+            position: fixed; inset: 0;
+            opacity: 0.15;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0,255,159,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,159,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+        @keyframes gridMove {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(50px) translateX(50px); }
+        }
+        .setup-container {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 560px;
+            padding: 2rem;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+        .logo-icon {
+            filter: drop-shadow(0 0 10px rgba(0,255,159,0.35));
+            flex-shrink: 0;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+        .logo-line-top,
+        .logo-line-bottom {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-shadow: 0 0 30px rgba(0,255,159,0.3);
+            white-space: nowrap;
+        }
+        .logo-line-bottom {
+            color: var(--accent-green);
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--border-subtle);
+            border: 1px solid rgba(0,255,159,0.2);
+            transition: all 0.3s;
+        }
+        .step-dot.active {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px rgba(0,255,159,0.5);
+        }
+        .step-dot.done {
+            background: rgba(0,255,159,0.4);
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.35rem;
+            font-weight: 600;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.55rem 0.75rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus {
+            border-color: var(--border-focus);
+        }
+        .form-hint {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-top: 0.25rem;
+        }
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .radio-option {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 0;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .radio-option:hover {
+            border-color: var(--green-30);
+        }
+        .radio-option.selected {
+            border-color: var(--accent-green);
+            background: rgba(0,255,159,0.05);
+        }
+        .radio-option input[type="radio"] {
+            position: absolute; opacity: 0; pointer-events: none;
+        }
+        .radio-option .radio-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .radio-option .radio-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .radio-option .radio-desc {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-top: 0.25rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1.2rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            background: transparent;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn:hover { border-color: var(--green-80); box-shadow: var(--green-glow); }
+        .btn-primary {
+            background: var(--accent-green);
+            color: var(--bg-body);
+            border-color: var(--accent-green);
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background: #33ffb3;
+            box-shadow: 0 0 12px rgba(0,255,159,0.3);
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        .step { display: none; }
+        .step.active { display: block; }
+        .msg {
+            padding: 0.6rem 0.8rem;
+            border-radius: 0;
+            font-size: 0.75rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .msg.error {
+            background: rgba(255,85,85,0.1);
+            border: 1px solid rgba(255,85,85,0.3);
+            color: var(--accent-red);
+            display: block;
+        }
+        .msg.success {
+            background: rgba(0,255,159,0.1);
+            border: 1px solid rgba(0,255,159,0.3);
+            color: var(--accent-green);
+            display: block;
+        }
+        #pg-fields { display: none; }
+        .spinner {
+            display: inline-block;
+            width: 14px; height: 14px;
+            border: 2px solid rgba(0,255,159,0.3);
+            border-top-color: var(--accent-green);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.8rem;
+        }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-label { color: var(--text-dim); }
+        .summary-value { color: var(--accent-green); font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="setup-container">
+        <div class="logo">
+            <svg class="logo-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.25C17.25 23.15 21 18.25 21 13V7l-9-5z"/>
+                <rect x="9" y="10" width="6" height="7" rx="0.5"/>
+                <path d="M9 13h6"/>
+                <circle cx="12" cy="11.5" r="0.5"/>
+            </svg>
+            <span class="logo-text"><span class="logo-line-top">GATE</span><span class="logo-line-bottom">KEEPER</span></span>
+        </div>
+        <div class="subtitle">Initial Setup</div>
+
+        <div class="step-indicator">
+            <div class="step-dot active" id="dot-1"></div>
+            <div class="step-dot" id="dot-2"></div>
+            <div class="step-dot" id="dot-3"></div>
+        </div>
+
+        <!-- Step 1: Database -->
+        <div class="step active" id="step-1">
+            <div class="card">
+                <div class="card-title">Database Configuration</div>
+                <div class="form-label" style="margin-bottom: 0.75rem;">Select Database Engine</div>
+                <div class="radio-group">
+                    <label class="radio-option selected" id="opt-sqlite">
+                        <input type="radio" name="db_driver" value="sqlite" checked>
+                        <div class="radio-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+                        <div class="radio-label">SQLite</div>
+                        <div class="radio-desc">Local file, zero config</div>
+                    </label>
+                    <label class="radio-option" id="opt-postgres">
+                        <input type="radio" name="db_driver" value="postgres">
+                        <div class="radio-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+                        <div class="radio-label">PostgreSQL</div>
+                        <div class="radio-desc">Remote or local server</div>
+                    </label>
+                </div>
+
+                <div id="sqlite-fields">
+                    <div class="form-group">
+                        <label class="form-label">Database File Path</label>
+                        <input class="form-input" type="text" id="db-path" value="" placeholder="Loading...">
+                        <div class="form-hint">Absolute path recommended for container deployments</div>
+                    </div>
+                </div>
+
+                <div id="pg-fields">
+                    <div class="form-group">
+                        <label class="form-label">Host</label>
+                        <input class="form-input" type="text" id="pg-host" placeholder="localhost" value="localhost">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                        <div class="form-group">
+                            <label class="form-label">Port</label>
+                            <input class="form-input" type="number" id="pg-port" value="5432">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Database</label>
+                            <input class="form-input" type="text" id="pg-database" placeholder="gatekeeper" value="gatekeeper">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input class="form-input" type="text" id="pg-user" placeholder="gatekeeper">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input class="form-input" type="password" id="pg-password" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">SSL Mode</label>
+                        <select class="form-select" id="pg-sslmode">
+                            <option value="disable">Disable</option>
+                            <option value="require">Require</option>
+                            <option value="verify-ca">Verify CA</option>
+                            <option value="verify-full">Verify Full</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn" id="btn-test-db" style="width: 100%; justify-content: center;">
+                    Test Connection
+                </button>
+                <div class="msg" id="db-msg"></div>
+            </div>
+            <div class="actions">
+                <div></div>
+                <button class="btn btn-primary">Next →</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Admin Account -->
+        <div class="step" id="step-2">
+            <div class="card">
+                <div class="card-title">Administrator Account</div>
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input class="form-input" type="text" id="admin-username" value="admin" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Display Name</label>
+                    <input class="form-input" type="text" id="admin-display-name" placeholder="e.g. John Smith" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input class="form-input" type="password" id="admin-password" placeholder="Min 12 chars, upper+lower+digit+special" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Confirm Password</label>
+                    <input class="form-input" type="password" id="admin-password-confirm" placeholder="Re-enter password" autocomplete="new-password">
+                </div>
+                <div class="msg" id="admin-msg"></div>
+            </div>
+            <div class="actions">
+                <button class="btn">← Back</button>
+                <button class="btn btn-primary">Next →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Confirm -->
+        <div class="step" id="step-3">
+            <div class="card">
+                <div class="card-title">Confirm Setup</div>
+                <div id="summary"></div>
+            </div>
+            <div class="msg" id="setup-msg"></div>
+            <div class="actions">
+                <button class="btn">← Back</button>
+                <button class="btn btn-primary" id="btn-complete">
+                    Complete Setup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/setup.js"></script>
+</body>
+</html>

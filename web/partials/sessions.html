@@ -1,0 +1,102 @@
+<!-- sessions -->
+<section class="view" id="view-sessions">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Sessions</div>
+            <div class="page-subtitle" id="sessions-subtitle">Live connections</div>
+        </div>
+        <div class="flex-row">
+            <button class="btn btn-sm btn-danger" id="btn-kill-all-sessions-header" data-action="kill-all-sessions" style="display:none;">
+                <svg viewBox="0 0 24 24" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Kill All
+            </button>
+            <button class="btn btn-sm" data-action="load-sessions">
+                <svg viewBox="0 0 24 24" width="14" height="14"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                Refresh
+            </button>
+        </div>
+    </div>
+
+    <div class="view-tabs" id="sessions-tabs">
+        <button class="view-tab active" data-sessions-tab="active">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            Active
+            <span class="tab-badge" id="sessions-tab-active-count">0</span>
+        </button>
+        <button class="view-tab" data-sessions-tab="requests" id="sessions-tab-requests" style="display:none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Pending Requests
+            <span class="tab-badge tab-badge-dim" id="sessions-tab-requests-count">0</span>
+        </button>
+        <button class="view-tab" data-sessions-tab="history">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            History
+        </button>
+    </div>
+
+    <div class="view-tab-pane active" data-sessions-pane="active">
+        <div class="card card-flush">
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Target</th>
+                        <th>Reason</th>
+                        <th>Protocol</th>
+                        <th>Connected At</th>
+                        <th>Duration</th>
+                        <th>Bytes TX/RX</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="active-sessions-body">
+                    <tr><td colspan="8"><div class="table-loading"><span class="spinner"></span> Loading</div></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="view-tab-pane" data-sessions-pane="requests" id="access-requests-section">
+        <div class="card card-flush">
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Host</th>
+                        <th>Reason</th>
+                        <th>Requested</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="access-requests-body">
+                    <tr><td colspan="5"><div class="table-loading"><span class="spinner"></span> Loading</div></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="view-tab-pane" data-sessions-pane="history">
+        <div class="filter-bar">
+            <input class="form-input filter-input" type="text" id="filter-sessions-history" placeholder="Search user or host...">
+            <span class="filter-count" id="filter-sessions-history-count"></span>
+        </div>
+        <div class="card card-flush">
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Target</th>
+                        <th>Reason</th>
+                        <th>Protocol</th>
+                        <th>Time</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="history-sessions-body">
+                    <tr><td colspan="7"><div class="table-loading"><span class="spinner"></span> Loading</div></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

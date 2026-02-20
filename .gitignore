@@ -1,0 +1,55 @@
+# Logs
+*.log
+gk_stderr.log
+
+# Binaries (root-level only so cmd/gatekeeper/ isn't ignored)
+/gatekeeper
+/gatekeeper.exe
+/gatekeeper.exe~
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Keys & secrets
+gatekeeper_host_key
+gatekeeper_host_key.pub
+admin_password.txt
+*.pem
+*.key
+*.crt
+
+# TLS certs directory
+configs/tls/
+
+# Session recordings
+recordings/
+
+# Coverage output
+cover
+coverage
+coverage.out
+*.coverprofile
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go vendor (root-level only so web/vendor/ isn't ignored)
+/vendor/
+
+# Docker
+docker-compose.override.yml
+
+# Archive / scratch
+archive/
+
+Documents/
+scripts/

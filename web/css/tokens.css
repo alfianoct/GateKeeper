@@ -1,0 +1,35 @@
+/* gatekeeper design tokens */
+:root {
+    --bg-body: #0a0a0f;
+    --bg-card: #0f0f1a;
+    --bg-card-hover: #12121c;
+    --bg-input: #1a1a2e;
+    --bg-tag: #374151;
+    --bg-terminal: #080810;
+
+    --accent-green: #00ff9f;
+    --accent-cyan: #00d4ff;
+    --accent-red: #ff4d6a;
+    --accent-yellow: #fbbf24;
+    --accent-orange: #f97316;
+    --accent-amber: #f59e0b;
+    --accent-secondary: #6c5ce7;
+
+    --green-30: rgba(0, 255, 159, 0.3);
+    --green-80: rgba(0, 255, 159, 0.8);
+    --green-glow: 0 0 20px rgba(0, 255, 159, 0.3);
+    --cyan-30: rgba(0, 212, 255, 0.3);
+    --red-30: rgba(255, 77, 106, 0.3);
+
+    --text-primary: #f1f1f1;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --text-dim: #6b7280;
+
+    --border-subtle: #374151;
+    --border: #374151;
+    --radius: 6px;
+
+    --font-body: 'JetBrains Mono', monospace;
+    --font-heading: 'Orbitron', monospace;
+}

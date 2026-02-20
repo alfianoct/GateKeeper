@@ -1,0 +1,31 @@
+<!-- terminal -->
+<section class="view" id="view-terminal">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Terminal</div>
+            <div class="page-subtitle">Secure shell sessions via WebSocket proxy</div>
+        </div>
+        <button class="btn btn-sm btn-danger" id="btn-kill-all-sessions" data-action="kill-all-sessions">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Kill All Sessions
+        </button>
+    </div>
+
+    <div class="terminal-wrapper">
+        <div class="terminal-header">
+            <div class="terminal-tab-bar" id="terminal-tabs">
+                <div class="empty-state" style="padding: 0.5rem 1rem; font-size: 0.7rem;">
+                    No active sessions — connect to a host to begin
+                </div>
+            </div>
+            <div class="terminal-actions">
+            </div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div class="empty-state">
+                <div class="empty-state-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
+                <div>Select a host from the Hosts view to open a session</div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,202 @@
+/* utility classes — replaces inline styles */
+
+/* layout */
+.flex-row { display: flex; gap: 0.5rem; align-items: center; }
+.flex-row-end { display: flex; gap: 0.5rem; align-items: end; flex-wrap: wrap; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-1 { flex: 1; }
+.flex-wrap { flex-wrap: wrap; }
+
+.grid-stack { display: grid; gap: 1rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+/* card modifiers */
+.card-flush { padding: 0; }
+.card-section { padding: 1.5rem; }
+.card-section + .card-section { margin-top: 1rem; }
+
+/* section titles (settings headings etc) */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-green);
+}
+.section-title-sm { font-size: 0.9rem; margin-bottom: 0.75rem; }
+.section-title.cyan { color: var(--accent-cyan); }
+.section-title.amber { color: var(--accent-amber); }
+
+/* form helpers */
+.form-hint-sub {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+    display: block;
+}
+.form-hint-xs {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    margin-top: 0.15rem;
+    display: block;
+}
+.form-group-inline { margin: 0; flex: 1; min-width: 120px; }
+.form-group-narrow { max-width: 200px; }
+.form-group-flush { margin-bottom: 0; }
+.form-input-readonly { opacity: 0.7; cursor: default; }
+
+/* auth-specific */
+.login-instance-name {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+    letter-spacing: 0.05em;
+}
+.login-divider {
+    margin: 1.25rem 0;
+    text-align: center;
+    position: relative;
+}
+.login-divider-text {
+    background: var(--bg-card);
+    padding: 0 0.75rem;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+}
+.login-divider-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 1px solid var(--border-subtle);
+}
+.login-btn-oidc {
+    width: 100%;
+    justify-content: center;
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+.login-btn-saml {
+    width: 100%;
+    justify-content: center;
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+}
+.login-sso-error {
+    color: var(--accent-red, #ff5555);
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 0.75rem;
+}
+.login-subtitle-amber { color: var(--accent-amber); }
+.auth-hint {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 0.75rem 0;
+    text-align: center;
+}
+
+/* mfa */
+.mfa-code-input {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+}
+.mfa-recovery-input { text-align: center; letter-spacing: 0.1em; }
+.mfa-link { font-size: 0.7rem; color: var(--text-dim); }
+.mfa-toggle-btn {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    border-color: var(--border-subtle);
+}
+.mfa-center { margin-top: 1rem; text-align: center; }
+
+/* modal helpers */
+.modal-sm { max-width: 480px; }
+.modal-divider {
+    border-top: 1px solid var(--border-subtle);
+    margin: 1rem 0;
+    padding-top: 1rem;
+}
+.modal-divider-label {
+    font-size: 0.7rem;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+.form-group-check { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-delete-left { margin-right: auto; }
+.form-actions-mt { margin-top: 1rem; }
+
+/* settings-specific */
+.settings-policy-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.settings-policy-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+.settings-policy-desc { font-size: 0.65rem; color: var(--text-dim); }
+.settings-policy-input { width: 80px; text-align: center; }
+.saml-meta-info {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    padding: 0.5rem;
+    background: rgba(255,255,255,0.03);
+}
+
+/* security view */
+.sec-split { display: flex; gap: 0; }
+.sec-panel { flex: 1; }
+.sec-panel-right {
+    flex: 1;
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 1.5rem;
+    margin-left: 1.5rem;
+}
+
+/* spacing */
+.mt-1 { margin-top: 1rem; }
+.mb-0 { margin-bottom: 0; }
+
+/* dashboard link btn */
+.btn-link-sm {
+    font-size: 0.6rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* session viewer helpers */
+.sv-controls { display: flex; align-items: center; gap: 0.5rem; }
+.sv-speed-select { width: auto; padding: 0.2rem 0.4rem; font-size: 0.7rem; }
+
+/* group mapping row */
+.grid-mapping-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 0.5rem;
+    align-items: end;
+}
+
+/* edit user helpers */
+.text-dim-light { color: var(--text-dim); font-weight: 400; }
+.form-group-toggle { display: flex; align-items: center; gap: 0.5rem; }
+.checkbox-accent { accent-color: var(--accent-green); }
+.form-label-flush { margin: 0; }
+
+/* btn heights for inline forms */
+.btn-h-input { height: 2.2rem; }

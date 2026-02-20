@@ -1,0 +1,38 @@
+server:
+    listen: :8443
+    http_redirect: :8080
+    tls_cert: tls\server.crt
+    tls_key: tls\server.key
+    deployment_mode: single
+database:
+    driver: sqlite
+    path: ./gatekeeper.db
+    dsn: ""
+auth:
+    oidc_issuer: ""
+    client_id: ""
+    client_secret: ${GK_OIDC_SECRET}
+    redirect_url: ""
+    session_duration: 24h
+ssh:
+    host_key_path: ./gatekeeper_host_key
+    default_port: 22
+    connect_timeout: 10s
+    keepalive_interval: 30s
+    inactivity_timeout: 30m
+audit:
+    log_commands: true
+    record_sessions: true
+    recording_path: ./recordings
+    retention_days: 90
+health:
+    check_interval: 60s
+    timeout: 5s
+secrets:
+    backend: none
+    vault_addr: ""
+    vault_mount: ""
+    vault_role: ""
+observability:
+    prometheus_enabled: false
+    prometheus_listen: :9090

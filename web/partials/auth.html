@@ -1,0 +1,118 @@
+<!-- login -->
+<div class="login-screen" id="login-screen">
+    <div class="bg-grid"></div>
+    <div class="login-container">
+        <div class="login-logo">
+            <svg class="logo-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.25C17.25 23.15 21 18.25 21 13V7l-9-5z"/>
+                <rect x="9" y="10" width="6" height="7" rx="0.5"/>
+                <path d="M9 13h6"/>
+                <circle cx="12" cy="11.5" r="0.5"/>
+            </svg>
+            <span class="logo-text"><span class="logo-line-top">GATE</span><span class="logo-line-bottom">KEEPER</span></span>
+        </div>
+        <div class="login-subtitle">Secure Access Gateway</div>
+        <div class="login-instance-name" id="login-instance-name" style="display:none;"></div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input class="form-input" type="text" id="login-username" name="username" placeholder="admin" autocomplete="username" required autofocus>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input class="form-input" type="password" id="login-password" name="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autocomplete="current-password" required>
+            </div>
+            <div class="login-error" id="login-error"></div>
+            <button type="submit" class="btn btn-primary login-btn" id="login-btn">Sign In</button>
+        </form>
+
+        <div id="login-divider" class="login-divider" style="display:none;">
+            <span class="login-divider-text">or</span>
+            <div class="login-divider-line"></div>
+        </div>
+
+        <button id="login-oidc-btn" class="btn login-btn login-btn-oidc" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Sign in with SSO
+        </button>
+
+        <button id="login-saml-btn" class="btn login-btn login-btn-saml" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Sign in with SAML
+        </button>
+
+        <div id="login-oidc-error" class="login-sso-error" style="display:none;"></div>
+    </div>
+</div>
+
+<!-- mfa -->
+<div class="login-screen" id="mfa-screen" style="display:none;">
+    <div class="bg-grid"></div>
+    <div class="login-container">
+        <div class="login-logo">
+            <svg class="logo-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.25C17.25 23.15 21 18.25 21 13V7l-9-5z"/>
+                <rect x="9" y="10" width="6" height="7" rx="0.5"/>
+                <path d="M9 13h6"/>
+                <circle cx="12" cy="11.5" r="0.5"/>
+            </svg>
+            <span class="logo-text"><span class="logo-line-top">GATE</span><span class="logo-line-bottom">KEEPER</span></span>
+        </div>
+        <div class="login-subtitle">Two-Factor Authentication</div>
+        <p class="auth-hint">Enter the 6-digit code from your authenticator app.</p>
+        <form id="mfa-form">
+            <div class="form-group">
+                <label class="form-label">Authentication Code</label>
+                <input class="form-input mfa-code-input" type="text" id="mfa-code" name="code" placeholder="000000" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required autofocus>
+            </div>
+            <div class="login-error" id="mfa-error"></div>
+            <button type="submit" class="btn btn-primary login-btn" id="mfa-submit-btn">Verify</button>
+        </form>
+        <div class="mfa-center">
+            <button id="mfa-recovery-toggle" class="btn btn-sm mfa-toggle-btn">Use a recovery code instead</button>
+        </div>
+        <form id="mfa-recovery-form" class="mt-1" style="display:none;">
+            <div class="form-group">
+                <label class="form-label">Recovery Code</label>
+                <input class="form-input mfa-recovery-input" type="text" id="mfa-recovery-code" name="recovery_code" placeholder="xxxx-xxxx" autocomplete="off" required>
+            </div>
+            <div class="login-error" id="mfa-recovery-error"></div>
+            <button type="submit" class="btn btn-primary login-btn" id="mfa-recovery-btn">Recover</button>
+        </form>
+        <div class="mfa-center">
+            <a href="#" id="mfa-back-to-login" class="mfa-link">Back to login</a>
+        </div>
+    </div>
+</div>
+
+<!-- password expired -->
+<div class="login-screen" id="password-change-screen" style="display:none;">
+    <div class="bg-grid"></div>
+    <div class="login-container">
+        <div class="login-logo">
+            <svg class="logo-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <span class="logo-text"><span class="logo-line-top">GATE</span><span class="logo-line-bottom">KEEPER</span></span>
+        </div>
+        <div class="login-subtitle login-subtitle-amber">Password Expired</div>
+        <p class="auth-hint">Your password has expired. Please set a new password to continue.</p>
+        <form id="password-change-form">
+            <div class="form-group">
+                <label class="form-label">Current Password</label>
+                <input class="form-input" type="password" id="pwc-current" autocomplete="current-password" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">New Password</label>
+                <input class="form-input" type="password" id="pwc-new" autocomplete="new-password" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Confirm New Password</label>
+                <input class="form-input" type="password" id="pwc-confirm" autocomplete="new-password" required>
+            </div>
+            <div class="login-error" id="pwc-error"></div>
+            <button type="submit" class="btn btn-primary login-btn" id="pwc-btn">Change Password</button>
+        </form>
+    </div>
+</div>

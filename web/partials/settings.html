@@ -1,0 +1,429 @@
+<!-- settings -->
+<section class="view" id="view-settings">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Settings</div>
+            <div class="page-subtitle">Platform configuration</div>
+        </div>
+        <button type="button" id="btn-save-settings" class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="17 21 17 13 7 13 7 21" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="7 3 7 8 15 8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            Save Changes
+        </button>
+    </div>
+
+    <div class="view-tabs" id="settings-tabs">
+        <button class="view-tab active" data-settings-tab="general">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            General
+        </button>
+        <button class="view-tab" data-settings-tab="auth">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Authentication
+        </button>
+        <button class="view-tab" data-settings-tab="security">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Security
+        </button>
+        <button class="view-tab" data-settings-tab="integrations">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Integrations
+        </button>
+    </div>
+
+    <!-- general tab -->
+    <div class="view-tab-pane active" data-settings-pane="general">
+        <div class="card card-section">
+            <h3 class="section-title">General</h3>
+            <div class="grid-stack">
+                <div class="form-group">
+                    <label class="form-label">Instance Name</label>
+                    <input class="form-input" type="text" id="set-instance-name" placeholder="GateKeeper">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Instance ID</label>
+                        <input class="form-input form-input-readonly" type="text" id="set-instance-id" readonly>
+                        <span class="form-hint-sub">Override with <code>GK_INSTANCE_ID</code></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Deployment Mode</label>
+                        <input class="form-input form-input-readonly" type="text" id="set-deployment-mode" readonly>
+                        <span class="form-hint-sub">Set via <code>GK_DEPLOYMENT_MODE</code></span>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Session Recording</label>
+                        <select class="form-select" id="set-session-recording">
+                            <option value="true">Enabled</option>
+                            <option value="false">Disabled</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Session TTL</label>
+                        <input class="form-input" type="text" id="set-session-ttl" placeholder="24h">
+                        <span class="form-hint-sub">Go duration — e.g. 1h, 30m, 24h</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- auth tab -->
+    <div class="view-tab-pane" data-settings-pane="auth">
+        <div class="card card-section">
+            <h3 class="section-title">Authentication</h3>
+            <div class="grid-stack">
+                <div class="form-group">
+                    <label class="form-label">Auth Mode</label>
+                    <select class="form-select" id="set-auth-mode">
+                        <option value="local">Local Only</option>
+                        <option value="oidc">OIDC / SSO Only</option>
+                        <option value="local+oidc">Local + OIDC</option>
+                        <option value="ldap">LDAP Only</option>
+                        <option value="local+ldap">Local + LDAP</option>
+                        <option value="saml">SAML Only</option>
+                        <option value="local+saml">Local + SAML</option>
+                    </select>
+                    <span class="form-hint-sub">
+                        <strong>Local</strong> — username/password &nbsp;|&nbsp;
+                        <strong>OIDC</strong> — SSO &nbsp;|&nbsp;
+                        <strong>LDAP</strong> — directory auth &nbsp;|&nbsp;
+                        <strong>SAML</strong> — enterprise SSO
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-section mt-1" id="oidc-settings-card" style="display:none;">
+            <h3 class="section-title cyan">OIDC / SSO Configuration</h3>
+            <div class="grid-stack">
+                <div class="form-group">
+                    <label class="form-label">Issuer URL</label>
+                    <input class="form-input" type="url" id="set-oidc-issuer" placeholder="https://accounts.google.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Client ID</label>
+                    <input class="form-input" type="text" id="set-oidc-client-id" placeholder="your-client-id">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Client Secret</label>
+                    <input class="form-input" type="password" id="set-oidc-client-secret" placeholder="your-client-secret">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Redirect URL</label>
+                    <input class="form-input" type="url" id="set-oidc-redirect-url" placeholder="https://gatekeeper.example.com/auth/oidc/callback">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Auto-Provision Users</label>
+                        <select class="form-select" id="set-oidc-auto-provision">
+                            <option value="false">No — require pre-created account</option>
+                            <option value="true">Yes — create on first login</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Default Role for New Users</label>
+                        <select class="form-select" id="set-oidc-default-role">
+                            <option value="user">User</option>
+                            <option value="platform-admin">Platform Admin</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-section mt-1" id="ldap-settings-card" style="display:none;">
+            <h3 class="section-title amber">LDAP Configuration</h3>
+            <div class="grid-stack">
+                <div class="form-group">
+                    <label class="form-label">LDAP URL</label>
+                    <input class="form-input" type="url" id="set-ldap-url" placeholder="ldaps://dc.example.com:636">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Bind DN (service account)</label>
+                    <input class="form-input" type="text" id="set-ldap-bind-dn" placeholder="cn=svc,ou=users,dc=example,dc=com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Bind Password</label>
+                    <input class="form-input" type="password" id="set-ldap-bind-password" placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">User search base</label>
+                    <input class="form-input" type="text" id="set-ldap-user-base" placeholder="ou=users,dc=example,dc=com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">User filter</label>
+                    <input class="form-input" type="text" id="set-ldap-user-filter" placeholder="(uid=%s) or (sAMAccountName=%s)">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Username attribute</label>
+                        <input class="form-input" type="text" id="set-ldap-username-attr" placeholder="uid">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Display name attribute</label>
+                        <input class="form-input" type="text" id="set-ldap-display-name-attr" placeholder="displayName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Group attribute</label>
+                    <input class="form-input" type="text" id="set-ldap-group-attr" placeholder="memberOf">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Auto-Provision Users</label>
+                        <select class="form-select" id="set-ldap-auto-provision">
+                            <option value="false">No</option>
+                            <option value="true">Yes — create on first login</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Default Role for New Users</label>
+                        <select class="form-select" id="set-ldap-default-role">
+                            <option value="user">User</option>
+                            <option value="platform-admin">Platform Admin</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-section mt-1" id="saml-settings-card" style="display:none;">
+            <h3 class="section-title amber">SAML Configuration</h3>
+            <div class="grid-stack">
+                <div class="form-group">
+                    <label class="form-label">IdP Metadata URL</label>
+                    <input class="form-input" type="url" id="set-saml-idp-metadata-url" placeholder="https://idp.example.com/metadata">
+                    <span class="form-hint-xs">URL to the Identity Provider's SAML metadata XML</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Entity ID (SP)</label>
+                    <input class="form-input" type="url" id="set-saml-entity-id" placeholder="https://gatekeeper.example.com">
+                    <span class="form-hint-xs">Unique identifier for this GateKeeper instance (usually the base URL)</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ACS URL</label>
+                    <input class="form-input" type="url" id="set-saml-acs-url" placeholder="https://gatekeeper.example.com/auth/saml/acs">
+                    <span class="form-hint-xs">Assertion Consumer Service URL — where the IdP posts SAML responses</span>
+                </div>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label class="form-label">Username Attribute</label>
+                        <input class="form-input" type="text" id="set-saml-username-attr" placeholder="auto-detect">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Display Name Attribute</label>
+                        <input class="form-input" type="text" id="set-saml-display-name-attr" placeholder="auto-detect">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Groups Attribute</label>
+                        <input class="form-input" type="text" id="set-saml-groups-attr" placeholder="auto-detect">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Auto-Provision Users</label>
+                        <select class="form-select" id="set-saml-auto-provision">
+                            <option value="false">No</option>
+                            <option value="true">Yes — create on first login</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Default Role for New Users</label>
+                        <select class="form-select" id="set-saml-default-role">
+                            <option value="user">User</option>
+                            <option value="platform-admin">Platform Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="saml-meta-info">
+                    SP Metadata: <a href="/auth/saml/metadata" target="_blank" style="color: var(--accent-cyan);">/auth/saml/metadata</a> — provide this to your IdP during SAML setup.
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-section mt-1" id="oidc-mapping-card" style="display:none;">
+            <h3 class="section-title cyan">External Group Mapping</h3>
+            <p style="font-size: 0.7rem; color: var(--text-dim); margin-bottom: 1rem;">
+                Map external OIDC / LDAP / SAML groups to GateKeeper groups. Unmapped groups pass through as-is.
+            </p>
+            <div id="group-mappings-list" style="margin-bottom: 1rem;"></div>
+            <div class="grid-mapping-row">
+                <div class="form-group form-group-flush">
+                    <label class="form-label">External Group</label>
+                    <input class="form-input" type="text" id="mapping-external" placeholder="e.g. authentik-admins">
+                </div>
+                <div class="form-group form-group-flush">
+                    <label class="form-label">GateKeeper Group</label>
+                    <select class="form-select" id="mapping-gatekeeper">
+                        <option value="">— select group —</option>
+                    </select>
+                </div>
+                <button class="btn btn-sm btn-primary btn-h-input" data-action="add-group-mapping">Add Mapping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- security tab -->
+    <div class="view-tab-pane" data-settings-pane="security">
+        <div class="card card-section">
+            <h3 class="section-title">Multi-Factor Authentication Policy</h3>
+            <div class="grid-stack">
+                <div class="form-group">
+                    <label class="form-label">MFA Policy</label>
+                    <select class="form-select" id="set-mfa-policy">
+                        <option value="optional">Optional (user choice)</option>
+                        <option value="required_for_admins">Required for admins</option>
+                        <option value="required_for_all">Required for all local users</option>
+                    </select>
+                    <span class="form-hint-sub">Users who haven't enrolled will be forced to set up 2FA at their next login.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-section mt-1">
+            <h3 class="section-title">Password Policy</h3>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="form-label">Minimum Length</label>
+                    <input class="form-input" type="number" id="set-password-min-length" min="8" max="128" value="12">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Max Age (days)</label>
+                    <input class="form-input" type="number" id="set-password-max-age-days" min="0" value="0">
+                    <span class="form-hint-sub">0 = no expiration</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Require Uppercase</label>
+                    <select class="form-select" id="set-password-require-uppercase">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Require Number</label>
+                    <select class="form-select" id="set-password-require-number">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Require Special Character</label>
+                    <select class="form-select" id="set-password-require-special">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">History Count</label>
+                    <input class="form-input" type="number" id="set-password-history-count" min="0" value="0">
+                    <span class="form-hint-sub">Prevent reuse of last N passwords. 0 = no history.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-section mt-1">
+            <h3 class="section-title cyan">Network &amp; Session Policy</h3>
+
+            <div class="settings-policy-row">
+                <div class="flex-1">
+                    <div class="settings-policy-label">Concurrent Session Limit</div>
+                    <div class="settings-policy-desc">Max SSH sessions per user. Per-group limits (set in Groups) override this. 0 = unlimited.</div>
+                </div>
+                <input class="form-input settings-policy-input" type="number" id="set-max-sessions-per-user" min="0" value="0">
+            </div>
+
+            <div class="settings-policy-label">IP Allow / Deny Rules</div>
+            <p style="font-size:0.65rem; color:var(--text-dim); margin-bottom:0.75rem;">Deny rules are evaluated first. If any allow rules exist, only matching IPs are permitted.</p>
+            <div class="filter-bar" style="margin-bottom:0.5rem;">
+                <input class="form-input filter-input" type="text" id="filter-ip-rules" placeholder="Search CIDR or description...">
+                <span class="filter-count" id="filter-ip-rules-count"></span>
+            </div>
+            <div id="ip-rules-list" style="margin-bottom: 1rem;">
+                <div class="table-loading"><span class="spinner"></span> Loading</div>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+                <div style="display: flex; gap: 0.5rem; align-items: end; flex-wrap: wrap;">
+                    <div class="form-group" style="margin:0; width:90px;">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" id="ip-rule-type">
+                            <option value="deny">Deny</option>
+                            <option value="allow">Allow</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0; flex:1; min-width:140px;">
+                        <label class="form-label">CIDR / IP</label>
+                        <input class="form-input" type="text" id="ip-rule-cidr" placeholder="10.0.0.0/8">
+                    </div>
+                    <div class="form-group" style="margin:0; width:100px;">
+                        <label class="form-label">Scope</label>
+                        <select class="form-select" id="ip-rule-scope">
+                            <option value="global">Global</option>
+                            <option value="host">Per Host</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0; width:100px;" id="ip-rule-scope-id-wrap">
+                        <label class="form-label">Host ID</label>
+                        <input class="form-input" type="text" id="ip-rule-scope-id" placeholder="host ID">
+                    </div>
+                    <div class="form-group" style="margin:0; flex:1; min-width:120px;">
+                        <label class="form-label">Description</label>
+                        <input class="form-input" type="text" id="ip-rule-description" placeholder="optional">
+                    </div>
+                    <button class="btn btn-sm btn-primary" id="btn-add-ip-rule" style="height:34px;">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- integrations tab -->
+    <div class="view-tab-pane" data-settings-pane="integrations">
+        <div class="card card-section">
+            <h3 class="section-title cyan">Audit Export / SIEM Integration</h3>
+            <p style="font-size:0.75rem; color:var(--text-dim); margin-bottom:1rem;">Push audit events to external systems in real time. Events are sent asynchronously and will not block the application.</p>
+            <div class="grid-stack">
+                <div class="form-group">
+                    <label class="form-label">Webhook URL</label>
+                    <input class="form-input" type="url" id="set-audit-webhook-url" placeholder="https://siem.example.com/webhook">
+                    <span class="form-hint-sub">JSON POST with <code>X-GateKeeper-Signature</code> HMAC header.</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Webhook Secret (HMAC)</label>
+                    <input class="form-input" type="password" id="set-audit-webhook-secret" placeholder="optional signing secret" autocomplete="off">
+                </div>
+                <div>
+                    <button class="btn btn-sm" id="btn-test-webhook" style="border-color:var(--accent-cyan); color:var(--accent-cyan);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Test Webhook
+                    </button>
+                    <span id="webhook-test-result" style="font-size:0.7rem; margin-left:0.5rem;"></span>
+                </div>
+            </div>
+            <div style="display: grid; gap: 1rem; margin-top: 1.25rem; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+                <div class="form-group">
+                    <label class="form-label">Syslog Address</label>
+                    <input class="form-input" type="text" id="set-audit-syslog-addr" placeholder="udp://siem.example.com:514">
+                    <span class="form-hint-sub">RFC 5424 structured data. Prefix with <code>tcp://</code> or <code>udp://</code>.</span>
+                </div>
+                <div class="form-group form-group-narrow">
+                    <label class="form-label">Syslog Facility</label>
+                    <input class="form-input" type="number" id="set-audit-syslog-facility" min="0" max="23" value="1">
+                </div>
+            </div>
+            <div style="margin-top: 1.25rem; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+                <p style="font-size:0.75rem; color:var(--text-dim); margin-bottom:0.75rem;">Bulk export audit logs for compliance reporting:</p>
+                <div style="display:flex; gap:0.5rem;">
+                    <button class="btn btn-sm" id="btn-export-audit-json" style="border-color:var(--accent-green); color:var(--accent-green);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export JSON
+                    </button>
+                    <button class="btn btn-sm" id="btn-export-audit-csv" style="border-color:var(--accent-green); color:var(--accent-green);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export CSV
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

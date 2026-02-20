@@ -1,0 +1,59 @@
+services:
+  gatekeeper:
+    build: .
+    container_name: gatekeeper
+    restart: unless-stopped
+    ports:
+      - "8443:8443"
+      - "8080:8080"
+    volumes:
+      - gk-recordings:/app/recordings
+      - gk-config:/app/configs
+    environment:
+      - GK_LISTEN=:8443
+      - GK_HTTP_REDIRECT=:8080
+      - GK_DB_DRIVER=sqlite
+      - GK_DB_PATH=/app/gatekeeper.db
+      # - GK_TLS_CERT=/app/configs/tls/server.crt
+      # - GK_TLS_KEY=/app/configs/tls/server.key
+      # - GK_ENCRYPTION_KEY=your-32-byte-hex-key
+      # - GK_DEPLOYMENT_MODE=single
+
+  # Uncomment below for Postgres-backed deployment
+  # gatekeeper:
+  #   build: .
+  #   container_name: gatekeeper
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8443:8443"
+  #     - "8080:8080"
+  #   volumes:
+  #     - gk-recordings:/app/recordings
+  #   environment:
+  #     - GK_DB_DRIVER=postgres
+  #     - GK_DB_DSN=postgres://gatekeeper:changeme@postgres:5432/gatekeeper?sslmode=disable
+  #     - GK_DEPLOYMENT_MODE=single
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+
+  # postgres:
+  #   image: postgres:16-alpine
+  #   container_name: gatekeeper-db
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: gatekeeper
+  #     POSTGRES_PASSWORD: changeme
+  #     POSTGRES_DB: gatekeeper
+  #   volumes:
+  #     - pg-data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U gatekeeper"]
+  #     interval: 5s
+  #     timeout: 3s
+  #     retries: 5
+
+volumes:
+  gk-recordings:
+  gk-config:
+  # pg-data:

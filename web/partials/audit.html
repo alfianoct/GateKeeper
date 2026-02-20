@@ -1,0 +1,44 @@
+<!-- audit -->
+<section class="view" id="view-audit">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Audit Log</div>
+            <div class="page-subtitle" id="audit-subtitle">Complete access trail</div>
+        </div>
+        <div class="flex-row">
+            <button class="btn btn-sm">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export
+            </button>
+            <button class="btn btn-sm" data-action="load-audit">
+                <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                Refresh
+            </button>
+        </div>
+    </div>
+
+    <div class="filter-bar">
+        <input class="form-input filter-input" type="text" id="filter-audit" placeholder="Search action, user, detail, IP...">
+        <input class="filter-date" type="date" id="filter-audit-from" title="From date">
+        <input class="filter-date" type="date" id="filter-audit-to" title="To date">
+        <span class="filter-count" id="filter-audit-count"></span>
+    </div>
+
+    <div class="card card-flush" id="audit-log-container">
+        <table class="sessions-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Action</th>
+                    <th>User</th>
+                    <th>Detail</th>
+                    <th>Source IP</th>
+                    <th>Session</th>
+                </tr>
+            </thead>
+            <tbody id="audit-log-body">
+                <tr><td colspan="6"><div class="table-loading"><span class="spinner"></span> Loading</div></td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>

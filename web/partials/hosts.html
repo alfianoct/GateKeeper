@@ -1,0 +1,59 @@
+<!-- hosts -->
+<section class="view active" id="view-hosts">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Hosts</div>
+            <div class="page-subtitle" id="hosts-subtitle">Infrastructure access</div>
+        </div>
+        <div class="flex-row">
+            <button class="btn btn-sm" data-action="load-hosts">
+                <svg viewBox="0 0 24 24" width="14" height="14"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                Refresh
+            </button>
+            <button class="btn btn-sm btn-primary admin-only" data-action="show-add-host" style="display:none;">
+                <svg viewBox="0 0 24 24" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Host
+            </button>
+        </div>
+    </div>
+
+    <div class="view-tabs" id="hosts-tabs">
+        <button class="view-tab active" data-hosts-tab="overview">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+            Overview
+            <span class="tab-badge" id="hosts-tab-total-count">0</span>
+        </button>
+        <button class="view-tab admin-only" data-hosts-tab="manage" style="display:none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Manage
+        </button>
+    </div>
+
+    <div class="view-tab-pane active" id="hosts-pane-overview">
+        <div id="hosts-container"></div>
+    </div>
+
+    <div class="view-tab-pane" id="hosts-pane-manage">
+        <div class="filter-bar">
+            <input class="form-input filter-input" type="text" id="filter-manage-hosts" placeholder="Search name, hostname, OS...">
+            <span class="filter-count" id="filter-manage-hosts-count"></span>
+        </div>
+        <div class="card card-flush">
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Hostname</th>
+                        <th>Port</th>
+                        <th>OS</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="manage-hosts-body">
+                    <tr><td colspan="6"><div class="table-loading"><span class="spinner"></span> Loading</div></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

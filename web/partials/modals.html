@@ -1,0 +1,386 @@
+<!-- reason-for-access prompt -->
+<div class="modal-overlay" id="modal-connect-reason">
+    <div class="modal">
+        <div class="modal-title">Reason for access</div>
+        <p class="form-hint" style="margin-bottom: 1rem;">This host requires a reason before connecting.</p>
+        <div class="form-group">
+            <label class="form-label">Reason</label>
+            <input class="form-input" type="text" id="connect-reason-input" placeholder="e.g. Deploy config change">
+            <div class="form-hint form-error" id="connect-reason-error"></div>
+        </div>
+        <div class="form-actions">
+            <button type="button" class="btn btn-sm" id="connect-reason-cancel">Cancel</button>
+            <button type="button" class="btn btn-sm btn-primary" id="connect-reason-submit">Connect</button>
+        </div>
+    </div>
+</div>
+
+<!-- access request prompt -->
+<div class="modal-overlay" id="modal-request-access">
+    <div class="modal">
+        <div class="modal-title">Request access</div>
+        <p class="form-hint" style="margin-bottom: 1rem;">An approver will review your request before you can connect.</p>
+        <input type="hidden" id="request-access-host-id">
+        <div class="form-group">
+            <label class="form-label">Reason (optional)</label>
+            <input class="form-input" type="text" id="request-access-reason" placeholder="e.g. Incident response">
+        </div>
+        <div class="form-actions">
+            <button type="button" class="btn btn-sm" data-gk-close="modal-request-access">Cancel</button>
+            <button type="button" class="btn btn-sm btn-primary" data-action="submit-request-access">Submit request</button>
+        </div>
+    </div>
+</div>
+
+<!-- add host modal -->
+<div class="modal-overlay" id="modal-add-host">
+    <div class="modal">
+        <div class="modal-title">Add Host</div>
+        <form id="form-add-host">
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input class="form-input" type="text" name="name" placeholder="e.g. web-server-01" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Hostname / IP</label>
+                <input class="form-input" type="text" name="hostname" placeholder="e.g. 10.0.10.21" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Port</label>
+                <input class="form-input" type="number" name="port" value="22">
+            </div>
+            <div class="form-group">
+                <label class="form-label">OS</label>
+                <input class="form-input" type="text" name="os" placeholder="e.g. Ubuntu 24.04">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Protocols (comma-separated)</label>
+                <input class="form-input" type="text" name="protocols" value="SSH" placeholder="SSH,VNC,RDP">
+            </div>
+            <div class="form-group form-group-check">
+                <label class="form-check"><input type="checkbox" name="require_reason"> Require reason for access</label>
+                <label class="form-check"><input type="checkbox" name="requires_approval"> Requires approval to connect</label>
+            </div>
+            <div class="modal-divider">
+                <div class="modal-divider-label">SSH Credentials</div>
+                <div class="form-group">
+                    <label class="form-label">SSH Username</label>
+                    <input class="form-input" type="text" name="ssh_user" placeholder="e.g. root" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Auth Method</label>
+                    <select class="form-select" name="ssh_auth_method">
+                        <option value="password">Password</option>
+                        <option value="key">SSH Key</option>
+                    </select>
+                </div>
+                <div class="form-group" id="add-host-password-group">
+                    <label class="form-label">SSH Password</label>
+                    <input class="form-input" type="password" name="ssh_password" placeholder="••••••••">
+                </div>
+                <div class="form-group" id="add-host-key-group" style="display:none;">
+                    <label class="form-label">SSH Key</label>
+                    <select class="form-select" name="ssh_key_id" id="add-host-key-select">
+                        <option value="">Select a key...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-sm" data-gk-close="modal-add-host">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-primary">Create Host</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- edit host modal -->
+<div class="modal-overlay" id="modal-edit-host">
+    <div class="modal">
+        <div class="modal-title">Edit Host</div>
+        <form id="form-edit-host">
+            <input type="hidden" name="id">
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input class="form-input" type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Hostname / IP</label>
+                <input class="form-input" type="text" name="hostname" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Port</label>
+                <input class="form-input" type="number" name="port" value="22">
+            </div>
+            <div class="form-group">
+                <label class="form-label">OS</label>
+                <input class="form-input" type="text" name="os">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Protocols (comma-separated)</label>
+                <input class="form-input" type="text" name="protocols">
+            </div>
+            <div class="form-group form-group-check">
+                <label class="form-check">
+                    <input type="checkbox" name="require_reason"> Require reason for access
+                </label>
+                <label class="form-check">
+                    <input type="checkbox" name="requires_approval"> Requires approval to connect
+                </label>
+            </div>
+            <div class="modal-divider">
+                <div class="modal-divider-label">SSH Credentials</div>
+                <div class="form-group">
+                    <label class="form-label">SSH Username</label>
+                    <input class="form-input" type="text" name="ssh_user" placeholder="e.g. root" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Auth Method</label>
+                    <select class="form-select" name="ssh_auth_method">
+                        <option value="password">Password</option>
+                        <option value="key">SSH Key</option>
+                    </select>
+                </div>
+                <div class="form-group" id="edit-host-password-group">
+                    <label class="form-label">SSH Password</label>
+                    <input class="form-input" type="password" name="ssh_password" placeholder="Leave blank to keep current">
+                </div>
+                <div class="form-group" id="edit-host-key-group" style="display:none;">
+                    <label class="form-label">SSH Key</label>
+                    <select class="form-select" name="ssh_key_id" id="edit-host-key-select">
+                        <option value="">Select a key...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-sm btn-danger btn-delete-left" data-action="delete-host">Delete Host</button>
+                <button type="button" class="btn btn-sm" data-gk-close="modal-edit-host">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ssh key modal -->
+<div class="modal-overlay" id="modal-add-key">
+    <div class="modal">
+        <div class="modal-title">Add SSH Key</div>
+        <form id="form-add-key">
+            <div class="form-group">
+                <label class="form-label">Key Name</label>
+                <input class="form-input" type="text" name="name" placeholder="e.g. deploy-key-prod" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Key Type</label>
+                <select class="form-select" name="key_type">
+                    <option value="ed25519">ED25519</option>
+                    <option value="rsa">RSA</option>
+                    <option value="ecdsa">ECDSA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Public Key</label>
+                <textarea class="form-input" name="public_key" rows="3" placeholder="ssh-ed25519 AAAA... user@host" required></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-sm" data-gk-close="modal-add-key">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-primary">Add Key</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- add user modal -->
+<div class="modal-overlay" id="modal-add-user">
+    <div class="modal">
+        <div class="modal-title">Add User</div>
+        <form id="form-add-user">
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input class="form-input" type="text" name="username" placeholder="e.g. jsmith" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Display Name</label>
+                <input class="form-input" type="text" name="display_name" placeholder="e.g. John Smith">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input class="form-input" type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Role</label>
+                <select class="form-select" name="role">
+                    <option value="user">User</option>
+                    <option value="platform-admin">Platform Admin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Groups (comma-separated)</label>
+                <input class="form-input" type="text" name="groups" placeholder="e.g. server-admin,network-team">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-sm" data-gk-close="modal-add-user">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-primary">Create User</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- edit user modal -->
+<div class="modal-overlay" id="modal-edit-user">
+    <div class="modal">
+        <div class="modal-title">Edit User</div>
+        <form id="form-edit-user">
+            <input type="hidden" name="user_id" id="edit-user-id">
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input class="form-input" type="text" name="username" disabled>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Display Name</label>
+                <input class="form-input" type="text" name="display_name" placeholder="Display name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Role</label>
+                <select class="form-select" name="role">
+                    <option value="user">User</option>
+                    <option value="platform-admin">Platform Admin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Groups (comma-separated)</label>
+                <input class="form-input" type="text" name="groups" placeholder="e.g. server-admin,network-team">
+            </div>
+            <div class="form-group">
+                <label class="form-label">New Password <span class="text-dim-light">(leave blank to keep current)</span></label>
+                <input class="form-input" type="password" name="password" placeholder="Min 12 chars, upper+lower+digit+special" autocomplete="new-password">
+            </div>
+            <div class="form-group form-group-toggle">
+                <input type="checkbox" id="edit-user-disabled" name="disabled" class="checkbox-accent">
+                <label for="edit-user-disabled" class="form-label form-label-flush">Account Disabled</label>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-sm" data-gk-close="modal-edit-user">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- group modal (add+edit) -->
+<div class="modal-overlay" id="modal-add-group">
+    <div class="modal">
+        <div class="modal-title" id="group-modal-title">Add Group</div>
+        <form id="form-add-group">
+            <input type="hidden" name="group_id" id="group-edit-id">
+            <div class="form-group">
+                <label class="form-label">Group Name</label>
+                <input class="form-input" type="text" name="name" placeholder="e.g. network-admins" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <input class="form-input" type="text" name="description" placeholder="e.g. Network team with full access">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Permissions</label>
+                <div class="gk-checkbox-grid" id="group-permissions-grid" style="gap:0.25rem;">
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="connect_hosts"><span class="gk-checkbox-mark"></span><span>Connect to hosts</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="view_sessions"><span class="gk-checkbox-mark"></span><span>View sessions</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="view_audit"><span class="gk-checkbox-mark"></span><span>View audit log</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="manage_sessions"><span class="gk-checkbox-mark"></span><span>Kill sessions</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="manage_hosts"><span class="gk-checkbox-mark"></span><span>Manage hosts</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="manage_users"><span class="gk-checkbox-mark"></span><span>Manage users</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="manage_keys"><span class="gk-checkbox-mark"></span><span>Manage SSH keys</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="manage_groups"><span class="gk-checkbox-mark"></span><span>Manage groups</span></label>
+                    <label class="gk-checkbox-label"><input type="checkbox" name="perm" value="manage_settings"><span class="gk-checkbox-mark"></span><span>Manage settings</span></label>
+                </div>
+            </div>
+
+            <div class="form-group form-group-narrow">
+                <label class="form-label">Max Sessions (0 = global default)</label>
+                <input class="form-input" type="number" name="max_sessions" id="group-max-sessions" min="0" value="0">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Allowed Hosts</label>
+                <div style="margin-bottom: 0.4rem;">
+                    <label class="gk-checkbox-label">
+                        <input type="checkbox" id="group-all-hosts">
+                        <span class="gk-checkbox-mark"></span>
+                        <span>All Hosts (wildcard)</span>
+                    </label>
+                </div>
+                <div id="group-hosts-dropdown" class="gk-multiselect">
+                    <div class="gk-multiselect-selected" id="group-selected-hosts"></div>
+                    <input class="form-input gk-multiselect-search" id="group-host-search" type="text" placeholder="Search hosts..." style="display:none;">
+                    <div class="gk-multiselect-options" id="group-host-options" style="display:none;"></div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-sm" data-gk-close="modal-add-group">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-primary" id="group-submit-btn">Create Group</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- mfa enrollment modal -->
+<div class="modal-overlay" id="modal-mfa-enroll">
+    <div class="modal modal-sm">
+        <div class="modal-title">Enable Two-Factor Authentication</div>
+        <p class="form-hint" style="margin-bottom:1rem;">Scan the QR code with your authenticator app, then enter the 6-digit code to verify.</p>
+        <div id="mfa-modal-body"></div>
+        <div class="form-actions form-actions-mt">
+            <button class="btn btn-sm" data-gk-close="modal-mfa-enroll">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- session replay viewer -->
+<div class="modal-overlay session-viewer-overlay" id="modal-session-viewer">
+    <div class="session-viewer">
+        <div class="session-viewer-header">
+            <div class="session-viewer-info">
+                <span class="session-viewer-title" id="sv-title">Session Replay</span>
+                <span class="sv-live-badge" id="sv-live-badge" style="display:none;">
+                    <span class="sv-live-dot"></span> LIVE
+                </span>
+                <span class="session-viewer-meta" id="sv-meta"></span>
+            </div>
+            <div class="session-viewer-controls">
+                <div id="sv-replay-controls" class="sv-controls">
+                    <button class="btn btn-sm" id="sv-play-btn">
+                        <svg viewBox="0 0 24 24" width="14" height="14"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        Play
+                    </button>
+                    <select class="form-select sv-speed-select" id="sv-speed">
+                        <option value="0.5">0.5×</option>
+                        <option value="1" selected>1×</option>
+                        <option value="2">2×</option>
+                        <option value="4">4×</option>
+                        <option value="8">8×</option>
+                        <option value="0">Instant</option>
+                    </select>
+                    <div class="sv-progress-wrap">
+                        <input type="range" class="sv-progress" id="sv-progress" min="0" max="1000" value="0">
+                        <span class="sv-time" id="sv-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+                <span id="sv-live-elapsed" class="sv-time" style="display:none;"></span>
+                <button class="btn btn-sm" id="sv-close-btn">
+                    <svg viewBox="0 0 24 24" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Close
+                </button>
+            </div>
+        </div>
+        <div class="session-viewer-terminal" id="sv-terminal"></div>
+        <div class="session-viewer-transcript-header">
+            <span>Transcript</span>
+            <span class="sv-transcript-hint">Plain-text output from the session</span>
+        </div>
+        <div class="session-viewer-transcript" id="sv-transcript">
+            <div class="empty-state" style="padding: 1.5rem; font-size: 0.75rem;">Click Play to generate transcript</div>
+        </div>
+    </div>
+</div>
